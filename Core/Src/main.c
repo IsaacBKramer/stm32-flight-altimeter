@@ -27,7 +27,11 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+typedef struct {
+	int16_t accel_x;
+	int16_t accel_y;
+	int16_t accel_z;
+} accel_data;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/

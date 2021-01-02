@@ -109,7 +109,9 @@ int main(void)
   MX_GPIO_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_GPIO_WRITEPIN(GPIOA, GPIO_PIN_10, GPIO_PIN_SET); // chip select high, disable spi device
+  HAL_GPIO_WRITEPIN(GPIOA, GPIO_PIN_10, GPIO_PIN_SET); // chip select high, disable spi device
+  HAL_GPIO_WRITEPIN(GPIOA, GPIO_PIN_10, GPIO_PIN_SET); // chip select high, disable spi device
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -228,7 +230,23 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+int read_spi_baro(void) {
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET);
 
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_SET);
+}
+
+int read_spi_9dof(void) {
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_RESET);
+
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_SET);
+}
+
+int write_spi_flash(void) {
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);
+
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET);
+}
 /* USER CODE END 4 */
 
 /**

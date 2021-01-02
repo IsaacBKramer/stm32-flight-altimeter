@@ -32,6 +32,22 @@ typedef struct {
 	int16_t accel_y;
 	int16_t accel_z;
 } accel_data;
+typedef struct {
+	int16_t gyro_x;
+	int16_t gyro_y;
+	int16_t gyro_z;
+} gyro_data;
+typedef struct {
+	int16_t magnet_x;
+	int16_t magnet_y;
+	int16_t magnet_z;
+} magnet_data;
+typedef struct {
+	accel_data accel;
+	gyro_data gyro;
+	magnet_data magnet;
+} flight_data;
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/

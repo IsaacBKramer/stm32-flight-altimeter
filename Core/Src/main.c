@@ -63,7 +63,7 @@ typedef struct {
 SPI_HandleTypeDef hspi1;
 
 /* USER CODE BEGIN PV */
-
+const uint8_t baro_reset_byte = 0b00011110;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -109,9 +109,6 @@ int main(void)
   MX_GPIO_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_SET); // chip select high, disable spi device
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_SET); // chip select high, disable spi device
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET); // chip select high, disable spi device
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -184,7 +181,7 @@ static void MX_SPI1_Init(void)
   hspi1.Instance = SPI1;
   hspi1.Init.Mode = SPI_MODE_MASTER;
   hspi1.Init.Direction = SPI_DIRECTION_2LINES;
-  hspi1.Init.DataSize = SPI_DATASIZE_4BIT;
+  hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
@@ -232,7 +229,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void read_spi_baro(void) {
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET);
-
+	HAL_SPI_Transmit(&hspi1, baro_reset_byte, 1, 10);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_SET);
 }
 
